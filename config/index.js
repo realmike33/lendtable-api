@@ -7,6 +7,8 @@ const base = {
   port: process.env.PORT || 4001,
   db: {
     url: process.env.MONGODB_URL || 'mongodb://127.0.0.1:27017/fantasy',
+    testUrl:
+      process.env.TEST_MONGODB_URL || 'mongodb://127.0.0.1:27017/fantasy-test',
   },
   jwtExp: '7d',
   secrets: {

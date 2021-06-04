@@ -12,7 +12,10 @@ app.use('/api', apiRouter)
 
 const server = async () => {
   try {
-    await mongoose.connect(db.url)
+    await mongoose.connect(db.url, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    })
   } catch (e) {
     console.log('e: ', e)
   }

@@ -1,0 +1,5 @@
+{
+  "verbose": true,
+  "watch": ["src/*", "index.js", "config.js", "src/node_modules/*"],
+  "runOnChangeOnly": true
+}

@@ -19,4 +19,31 @@ const decodeJWT = (token) => {
   return payload.id
 }
 
-module.exports = { createJWT, decodeJWT }
+const authenticate = async (req, res, next) => {
+  const token = req.get('authorization') || req.query.authorization
+
+  if (!token) {
+    req.sendStatus(401)
+    return
+  }
+
+  try {
+    const id = decodeJWT(token)
+
+    if (id) {
+      req.userId = id
+      return next()
+    }
+
+    req.sendStatus(401)
+  } catch (e) {
+    // expired token shouldn't 500
+    if (e.name === 'TokenExpiredError') {
+      req.sendStatus(401)
+      return
+    }
+    req.sendStatus(500)
+  }
+}
+
+module.exports = { createJWT, decodeJWT, authenticate }

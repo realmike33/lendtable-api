@@ -1,5 +1,5 @@
 const Router = require('express').Router
-
+const { authenticate } = require('./utils/jwt')
 // auth handlers
 const signup = require('./handlers/signup')
 const signin = require('./handlers/signin')
@@ -18,11 +18,14 @@ router.post('/signup', signup)
 router.post('/signin', signin)
 
 // CRUD routes on characters
-router.route('/characters').get(getAllCharacters).post(createCharacter)
+router
+  .route('/characters')
+  .get(authenticate, getAllCharacters)
+  .post(authenticate, createCharacter)
 router
   .route('/characters/:id')
-  .get(getCharacter)
-  .put(updateCharacter)
-  .delete(deleteCharacter)
+  .get(authenticate, getCharacter)
+  .put(authenticate, updateCharacter)
+  .delete(authenticate, deleteCharacter)
 
 module.exports = router

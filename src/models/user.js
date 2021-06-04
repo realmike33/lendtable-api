@@ -4,6 +4,7 @@ const userSchema = new Mongoose.Schema(
   {
     userName: {
       type: String,
+      unique: true,
       required: true,
     },
     password: {
@@ -31,8 +32,6 @@ userSchema.methods = {
     return bcrypt.compare(textPassword, this.password)
   },
 }
-
-userSchema.index({ userName: 1 })
 
 const User = Mongoose.model('user', userSchema)
 

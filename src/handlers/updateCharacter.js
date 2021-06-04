@@ -3,7 +3,7 @@ const Character = require('../models/character')
 const updateCharacter = async (req, res) => {
   const id = req.params.id
   const { stats, name, avatar } = req.body
-  if (!stats || Object.keys(status).length === 6 || !name || !avatar) {
+  if (!stats || Object.keys(stats).length === 6 || !name || !avatar) {
     res.sendStatus(400)
     return
   }

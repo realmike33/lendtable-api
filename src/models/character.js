@@ -11,7 +11,7 @@ const characterSchema = new Mongoose.Schema(
       required: true,
     },
     createdBy: {
-      type: mongoose.SchemaTypes.ObjectId,
+      type: Mongoose.SchemaTypes.ObjectId,
       ref: 'user',
       required: true,
     },
@@ -19,4 +19,6 @@ const characterSchema = new Mongoose.Schema(
   { timestamps: true }
 )
 
-export const Character = mongoose.model('character', characterSchema)
+const Character = Mongoose.model('character', characterSchema)
+
+module.exports = Character

@@ -9,7 +9,9 @@ const base = {
     url: process.env.MONGODB_URL || 'mongodb://127.0.0.1:27017/fantasy',
   },
   jwtExp: '7d',
-  secrets: {},
+  secrets: {
+    jwt: process.env.JWT_SECRET || 'balloons',
+  },
 }
 
 let envConfig = {}

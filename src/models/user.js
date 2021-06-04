@@ -34,4 +34,6 @@ userSchema.methods = {
 
 userSchema.index({ userName: 1 })
 
-export const User = mongoose.model('user', userSchema)
+const User = Mongoose.model('user', userSchema)
+
+module.exports = User

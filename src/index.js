@@ -1,11 +1,16 @@
 const Router = require('express').Router
-const deleteCharacter = require('./handlers/deleteCharacter')
-const createCharacter = require('./handlers/createCharacter')
-const updateCharacter = require('./handlers/updateCharacter')
-const getCharacter = require('./handlers/deleteCharacter')
-const getAllCharacters = require('./handlers/getAllCharacters')
+
+// auth handlers
 const signup = require('./handlers/signup')
 const signin = require('./handlers/signin')
+
+// character handlers
+const createCharacter = require('./handlers/createCharacter')
+const getCharacter = require('./handlers/getCharacter')
+const deleteCharacter = require('./handlers/deleteCharacter')
+const updateCharacter = require('./handlers/updateCharacter')
+const getAllCharacters = require('./handlers/getAllCharacters')
+
 const router = Router()
 
 //Auth routes

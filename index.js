@@ -2,14 +2,12 @@
 const { json, urlencoded } = require('body-parser')
 const morgan = require('morgan')
 const cors = require('cors')
-const passport = require('passport')
 const mongoose = require('mongoose')
 const app = require('express')()
 const { port, db } = require('./config')
 const apiRouter = require('./src')
 
 app.use([morgan('tiny'), json(), urlencoded({ extended: true }), cors()])
-app.use(passport.initialize())
 app.use('/api', apiRouter)
 
 const server = async () => {

@@ -1,13 +1,16 @@
 const Character = require('../models/character')
-
 const createCharacter = async (req, res) => {
-  const { stats, name, avatar } = req.body
-  if (!stats || Object.keys(stats).length !== 6 || !name || !avatar) {
+  const { stats, name } = req.body
+  if (!stats || Object.keys(stats).length !== 6 || !name) {
     res.sendStatus(400)
     return
   }
-  await Character.create({ name, avatar, ...stats, createdBy: req.userId })
-  res.sendStatus(200)
+  const newChar = await Character.create({
+    name,
+    ...stats,
+    createdBy: req.userId,
+  })
+  res.status(200).send({ data: newChar })
 }
 
 module.exports = createCharacter

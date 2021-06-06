@@ -15,8 +15,9 @@ describe('Auth', () => {
           expect(statusCode).toEqual(200)
           return this
         },
-        send: ({ token }) => {
+        send: ({ token, user }) => {
           expect(token).toBeTruthy()
+          expect(user).toBeTruthy()
         },
       }
       await signin(req, res)

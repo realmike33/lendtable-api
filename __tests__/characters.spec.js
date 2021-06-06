@@ -13,7 +13,6 @@ describe('Character', () => {
         userId: user,
         body: {
           name: 'testing',
-          avatar: '123.jpg',
           stats: {
             str: 5,
             dex: 5,
@@ -25,8 +24,13 @@ describe('Character', () => {
         },
       }
       const res = {
-        sendStatus: (statusCode) => {
+        status: function (statusCode) {
           expect(statusCode).toEqual(200)
+          return this
+        },
+        send: ({ data }) => {
+          expect(data).toBeTruthy()
+          expect(data.name).toEqual(req.body.name)
         },
       }
       await createCharacter(req, res)
@@ -44,7 +48,6 @@ describe('Character', () => {
       const user = newId()
       const newChar = await Character.create({
         name: 'testing',
-        avatar: '123.jpg',
         str: 5,
         dex: 5,
         con: 5,
@@ -73,7 +76,6 @@ describe('Character', () => {
     it('gets all characters no matter the owner', async () => {
       await Character.create({
         name: 'testing1',
-        avatar: '123.jpg',
         str: 5,
         dex: 5,
         con: 5,
@@ -84,7 +86,6 @@ describe('Character', () => {
       })
       await Character.create({
         name: 'testing1',
-        avatar: '123.jpg',
         str: 5,
         dex: 5,
         con: 5,
@@ -111,7 +112,6 @@ describe('Character', () => {
       const user = newId()
       const char = await Character.create({
         name: 'testing1',
-        avatar: '123.jpg',
         str: 5,
         dex: 5,
         con: 5,
@@ -122,7 +122,6 @@ describe('Character', () => {
       })
       await Character.create({
         name: 'testing',
-        avatar: '123.jpg',
         str: 5,
         dex: 5,
         con: 5,
@@ -153,7 +152,6 @@ describe('Character', () => {
       const user = newId()
       const newChar = await Character.create({
         name: 'testing',
-        avatar: '123.jpg',
         str: 5,
         dex: 5,
         con: 5,
@@ -166,7 +164,6 @@ describe('Character', () => {
         userId: user,
         body: {
           name: 'testing',
-          avatar: '1234.jpg',
           stats: {
             str: 7,
             dex: 7,
@@ -187,7 +184,6 @@ describe('Character', () => {
       const foundCharactar = await Character.findById(newChar._id).lean().exec()
       expect(foundCharactar).toBeTruthy()
       expect(foundCharactar.name).toEqual(newChar.name)
-      expect(foundCharactar.avatar).not.toEqual(newChar.avatar)
       expect(foundCharactar.str).not.toEqual(newChar.str)
       expect(foundCharactar.dex).not.toEqual(newChar.dex)
       expect(foundCharactar.con).not.toEqual(newChar.con)

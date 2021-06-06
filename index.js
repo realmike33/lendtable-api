@@ -19,6 +19,7 @@ const server = async () => {
   } catch (e) {
     console.log('e: ', e)
   }
+
   app.listen(port, (err) => {
     if (err) {
       process.exit(1)

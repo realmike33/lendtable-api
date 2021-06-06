@@ -15,14 +15,16 @@ const signin = async (req, res) => {
   }
 
   // check if password provided matches the user
-  const validPassword = foundUser.validPassword(password)
+  const validPassword = await foundUser.validPassword(password)
   if (!validPassword) {
     res.sendStatus(400)
     return
   }
 
   const token = await createJWT(foundUser._id.toString())
-  res.status(200).send({ token })
+  res
+    .status(200)
+    .send({ token, user: { username: foundUser.userName, id: foundUser._id } })
 }
 
 module.exports = signin

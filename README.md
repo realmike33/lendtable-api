@@ -1,5 +1,7 @@
 ## Getting Started
 
+API requires MongoDB to be installed
+
 Install dependents
 
 ```bash

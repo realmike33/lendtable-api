@@ -3,7 +3,7 @@ const { authenticate } = require('./utils/jwt')
 // auth handlers
 const signup = require('./handlers/signup')
 const signin = require('./handlers/signin')
-
+const getUser = require('./handlers/getUser')
 // character handlers
 const createCharacter = require('./handlers/createCharacter')
 const getCharacter = require('./handlers/getCharacter')
@@ -16,6 +16,7 @@ const router = Router()
 //Auth routes
 router.post('/signup', signup)
 router.post('/signin', signin)
+router.get('/me', authenticate, getUser)
 
 // CRUD routes on characters
 router

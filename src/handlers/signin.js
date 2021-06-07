@@ -22,9 +22,7 @@ const signin = async (req, res) => {
   }
 
   const token = await createJWT(foundUser._id.toString())
-  res
-    .status(200)
-    .send({ token, user: { username: foundUser.userName, id: foundUser._id } })
+  res.status(200).send({ token })
 }
 
 module.exports = signin

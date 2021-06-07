@@ -23,7 +23,7 @@ const authenticate = async (req, res, next) => {
   const token = req.get('authorization') || req.query.authorization
 
   if (!token) {
-    req.sendStatus(401)
+    res.sendStatus(401)
     return
   }
 
@@ -35,14 +35,14 @@ const authenticate = async (req, res, next) => {
       return next()
     }
 
-    req.sendStatus(401)
+    res.sendStatus(401)
   } catch (e) {
     // expired token shouldn't 500
     if (e.name === 'TokenExpiredError') {
-      req.sendStatus(401)
+      res.sendStatus(401)
       return
     }
-    req.sendStatus(500)
+    res.sendStatus(500)
   }
 }
 

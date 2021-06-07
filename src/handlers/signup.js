@@ -13,7 +13,7 @@ const signup = async (req, res) => {
   }
   const newUser = await User.create({ userName, password })
   const token = await createJWT(newUser._id.toString())
-  res.status(201).send({ token, user: { userName, id: newUser._id } })
+  res.status(201).send({ token })
 }
 
 module.exports = signup
